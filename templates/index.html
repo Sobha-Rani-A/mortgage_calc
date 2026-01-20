@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="calculator-card">
+        <div class="form-section">
+            <h2>Mortgage Calculator</h2>
+            <form method="POST">
+                <div class="input-group">
+                    <label>Mortgage Amount</label>
+                    <div class="field-with-prefix">
+                        <select name="currency" class="currency-select">
+                            <option value="$">USD ($)</option>
+                            <option value="€">EUR (€)</option>
+                            <option value="£">GBP (£)</option>
+                            <option value="₹">INR (₹)</option>
+                            <option value="¥">JPY (¥)</option>
+                            <option value="A$">AUD (A$)</option>
+                            <option value="C$">CAD (C$)</option>
+                            <option value="CHF">CHF</option>
+                            <option value="kr">SEK (kr)</option>
+                            <option value="NZ$">NZD (NZ$)</option>
+                        </select>
+                        <input type="number" name="amount" step="0.01" required placeholder="300,000">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Mortgage Term (Years)</label>
+                        <input type="number" name="term" required placeholder="25">
+                    </div>
+                    <div class="input-group">
+                        <label>Interest Rate (%)</label>
+                        <input type="number" name="rate" step="0.01" required placeholder="5.25">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Mortgage Type</label>
+                    <div class="radio-group">
+                        <label class="radio-card">
+                            <input type="radio" name="type" value="repayment" checked>
+                            <span>Repayment</span>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="type" value="interest_only">
+                            <span>Interest Only</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="calc-btn">Calculate Repayments</button>
+            </form>
+        </div>
+
+        <div class="results-section">
+            {% if result and result != "error" %}
+                <h3>Your results</h3>
+                <p>Your results are shown below based on the information you provided.</p>
+                <div class="result-box">
+                    <div class="monthly-result">
+                        <small>Your monthly repayments</small>
+                        <h1>{{ result.currency }}{{ "{:,.2f}".format(result.monthly) }}</h1>
+                    </div>
+                    <hr>
+                    <div class="total-result">
+                        <small>Total you'll pay over the term</small>
+                        <h3>{{ result.currency }}{{ "{:,.2f}".format(result.total) }}</h3>
+                    </div>
+                </div>
+            {% elif result == "error" %}
+                <p style="color: #d73328;">Please enter valid numeric values.</p>
+            {% else %}
+                <div class="empty-state">
+                    <h3>Results shown here</h3>
+                    <p>Complete the form and click "Calculate Repayments" to see your monthly payments.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

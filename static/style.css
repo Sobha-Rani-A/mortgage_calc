@@ -1,0 +1,94 @@
+:root {
+    --primary: #d7e313;
+    --dark-blue: #133041;
+    --slate: #4e6e7e;
+    --bg-light: #e3f4fc;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.calculator-card {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 900px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.form-section { padding: 40px; }
+.results-section {
+    background: var(--dark-blue);
+    color: white;
+    padding: 40px;
+    border-bottom-left-radius: 80px;
+}
+
+.input-group { margin-bottom: 20px; }
+label { display: block; margin-bottom: 8px; color: var(--slate); font-weight: 600; }
+
+.field-with-prefix {
+    display: flex;
+    border: 1px solid var(--slate);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.currency-select {
+    background: var(--bg-light);
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.radio-group { display: flex; flex-direction: column; gap: 10px; }
+.radio-card {
+    border: 1px solid var(--slate);
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.calc-btn {
+    background: var(--primary);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.result-box {
+    background: rgba(0,0,0,0.2);
+    padding: 20px;
+    border-top: 4px solid var(--primary);
+    border-radius: 8px;
+}
+
+.monthly-result h1 { color: var(--primary); margin: 10px 0; }
+
+@media (max-width: 768px) {
+    .calculator-card { grid-template-columns: 1fr; }
+    .results-section { border-bottom-left-radius: 0; }
+}
